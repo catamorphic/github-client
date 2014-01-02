@@ -113,8 +113,10 @@ case class GHShaRef(url: URI
 case class GHExpandedCommit(url: URI
                           , sha: String
                           , files: List[GHFile]
-                          , tree: GHShaRef
+                          , commit: GHAbbrevCommit
                           , parents: List[GHShaRef])
+
+case class GHAbbrevCommit(tree: GHShaRef)
 
 case class GHCommitComment(body: String
                          , commit_id: String

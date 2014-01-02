@@ -65,6 +65,7 @@ trait GitHubClientReadsInstances {
 
   implicit val ghFileReads: Reads[GHFile] = Json.reads[GHFile]
   implicit val ghShaRefReads: Reads[GHShaRef] = Json.reads[GHShaRef]
+  implicit val ghAbbrevCommitReads: Reads[GHAbbrevCommit] = Json.reads[GHAbbrevCommit]
   implicit val ghExpandedCommitReads: Reads[GHExpandedCommit] = Json.reads[GHExpandedCommit] 
   implicit val ghCommitCommentReads: Reads[GHCommitComment] = Json.reads[GHCommitComment]
   implicit val ghErrorReads: Reads[GHError] = Json.reads[GHError]
