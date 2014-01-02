@@ -99,6 +99,12 @@ case class GHFile(filename: String
                 , contents_url: URI
                 , patch: String)
 
+case class GHBlob(url: URI
+                , sha: String
+                , size: Int
+                , encoding: String
+                , content: String)
+
 case class GHFileContents(sha: String
                         , size: Int
                         , name: String
@@ -166,6 +172,11 @@ object GitHubClient {
   def fetchContents(token: String, contents_url: URI, ref: Option[String] = None): AsyncJsResult[GHFileContents] = {
     val params: List[(String, String)] = ref.map("ref" -> _).toList 
     respToJson[GHFileContents](WS.url(contents_url.toASCIIString).authWith(token).withQueryString(params: _*).get())    
+  }
+
+  def fetchBlob(token: String, owner: String, repoName: String, sha1: String): AsyncJsResult[GHBlob] = {
+    val uri: URI = UriTemplate("/repos{/owner,repo}/git/blobs{/sha1}").params("owner" -> owner, "repo" -> repoName, "sha1" -> sha1)
+    respToJson[GHBlob](gh(uri.toASCIIString).authWith(token).get())
   }
 
   def fetchPrCommits(token: String, owner: String, repoName: String, number: Int): AsyncJsResult[List[GHShaRef]] = {

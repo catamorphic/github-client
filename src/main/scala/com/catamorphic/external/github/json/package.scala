@@ -47,6 +47,8 @@ trait GitHubClientReadsInstances {
 
   implicit val ghFileContentsReads: Reads[GHFileContents] = Json.reads[GHFileContents]
 
+  implicit val ghBlobReads: Reads[GHBlob] = Json.reads[GHBlob]
+
   implicit val ghValidationCodeReads: Reads[GHValidationCode] = new Reads[GHValidationCode] {
     def reads(json: JsValue) = {
       lazy val error = JsError(Seq(JsPath() -> Seq(ValidationError("validate.error.expected.token", json)))) 
