@@ -18,6 +18,17 @@ import effect._
 import syntax.id._
 import java.util.Date
 
+object GHHeaders {
+  val EVENT: String = "X-GitHub-Event"
+  val LINK: String = "Link"
+  val RATELIMIT_LIMIT: String = "X-RateLimit-Limit"
+  val RATELIMIT_REMAINING: String = "X-RateLimit-Remaining"
+  val RATELIMIT_RESET: String = "X-RateLimit-Reset"
+}
+
+case class GHPing(zen: String
+                , hook_id: Int)
+
 case class GHRepository(name: String
                       , owner: GHOwner
                       , description: String

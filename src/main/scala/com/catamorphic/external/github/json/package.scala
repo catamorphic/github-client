@@ -15,6 +15,8 @@ package object json extends GitHubClientReadsInstances with GitHubClientWritesIn
 
 trait GitHubClientReadsInstances {
 
+  implicit val ghPingReads: Reads[GHPing] = Json.reads[GHPing]
+
   implicit val ghOrgReads: Reads[GHOrg] = Json.reads[GHOrg]
   implicit val ghOwnerReads: Reads[GHOwner] = Json.reads[GHOwner]
   implicit val ghRepositoryReads: Reads[GHRepository] = Json.reads[GHRepository]
