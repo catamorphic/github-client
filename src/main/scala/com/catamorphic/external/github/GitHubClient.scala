@@ -86,7 +86,6 @@ case class GHError(code: GHValidationCode
 case class GHErrors(errors: List[GHError]
                   , message: String)
 
-
 abstract sealed class GHPrAction
 case object GHPrOpened extends GHPrAction
 case object GHPrClosed extends GHPrAction
@@ -160,6 +159,25 @@ case object GHBlobType extends GHGitObjectType
 case object GHTreeType extends GHGitObjectType
 case object GHTagType extends GHGitObjectType
 
+case class GHStatus(state: GHStatusState
+                  , target_url: URI
+                  , description: String)
+
+abstract sealed class GHStatusState
+case object GHStatusPending extends GHStatusState
+case object GHStatusSuccess extends GHStatusState
+case object GHStatusError extends GHStatusState
+case object GHStatusFailure extends GHStatusState
+
+
+case class GHStatusResponse(created_at: Date
+                          , updated_at: Date
+                          , state: GHStatusState
+                          , target_url: URI
+                          , description: String
+                          , id: Int
+                          , url: URI
+                          , creator: GHOwner)
 
 object GitHubClient {
   import ExecutionContext.Implicits.global
@@ -225,5 +243,10 @@ object GitHubClient {
   def createHook(token: String, owner: String, repoName: String, hook: GHHookParams): AsyncJsResult[GHErrors \/ GHHook] = {
     val uri: URI = UriTemplate("/repos{/owner,repo}/hooks").params("owner" -> owner, "repo" -> repoName)
     eitherRespToJson[GHErrors, GHHook](gh(uri.toASCIIString).authWith(token).post[JsValue](writeJson(hook)))
+  }
+
+  def createStatus(token: String, owner: String, repoName: String, sha1: String, status: GHStatus): AsyncJsResult[GHStatusResponse] = {
+    val uri: URI = UriTemplate("/repos{/owner,repo}/statuses{/sha1}").params("owner" -> owner, "repo" -> repoName, "sha1" -> sha1)
+    respToJson[GHStatusResponse](gh(uri.toASCIIString).authWith(token).post[JsValue](writeJson(status)))    
   } 
 }
