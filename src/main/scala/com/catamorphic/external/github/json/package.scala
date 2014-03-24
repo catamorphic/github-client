@@ -44,6 +44,7 @@ trait GitHubClientReadsInstances {
 
   implicit val ghUserReads: Reads[GHUser] = Json.reads[GHUser]
   implicit val ghCommitReads: Reads[GHCommit] = Json.reads[GHCommit]
+  implicit val ghPusherReads: Reads[GHPusher] = Json.reads[GHPusher]
   implicit val ghPushReceiveReads: Reads[GHPushReceive] = Json.reads[GHPushReceive]
   implicit val ghPrReceiveReads: Reads[GHPrReceive] = Json.reads[GHPrReceive]
 

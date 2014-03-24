@@ -59,9 +59,13 @@ case class GHHook(id: Long
                 , events: List[String]
                 , active: Boolean)
 
+case class GHPusher( name: String
+                   , email: String)
+
 case class GHPushReceive(before: String
                        , after: String
                        , ref: String
+                       , pusher: GHPusher
                        , commits: List[GHCommit])
 
 case class GHPrReceive(action: GHPrAction
