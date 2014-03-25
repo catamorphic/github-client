@@ -59,13 +59,10 @@ case class GHHook(id: Long
                 , events: List[String]
                 , active: Boolean)
 
-case class GHPusher( name: String
-                   , email: String)
-
 case class GHPushReceive(before: String
                        , after: String
                        , ref: String
-                       , pusher: GHPusher
+                       , pusher: GHUser
                        , commits: List[GHCommit])
 
 case class GHPrReceive(action: GHPrAction
@@ -73,6 +70,7 @@ case class GHPrReceive(action: GHPrAction
                      , pull_request: GHPullRequest)
 
 case class GHPullRequest(url: URI
+                       , user: GHOwner
                        , title: String) // TODO add the rest of the fields defined in http://developer.github.com/v3/pulls/#get-a-single-pull-request
 
 case class GHCommit(id: String // this is a sha1, but it's inconsistently called 'id' here
