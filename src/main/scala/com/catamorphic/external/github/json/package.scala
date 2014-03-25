@@ -19,6 +19,7 @@ trait GitHubClientReadsInstances {
 
   implicit val ghOrgReads: Reads[GHOrg] = Json.reads[GHOrg]
   implicit val ghOwnerReads: Reads[GHOwner] = Json.reads[GHOwner]
+  implicit val ghPermissionReads: Reads[GHPermissions] = Json.reads[GHPermissions]
   implicit val ghRepositoryReads: Reads[GHRepository] = Json.reads[GHRepository]
 
   implicit val ghPrActionReads: Reads[GHPrAction] = new Reads[GHPrAction] {

@@ -35,7 +35,10 @@ case class GHRepository(name: String
                       , url: URI
                       , git_url: URI
                       , `private`: Boolean
-                      , fork: Boolean)
+                      , fork: Boolean
+                      , permissions: GHPermissions)
+
+case class GHPermissions(push: Boolean, pull: Boolean, admin: Boolean)
 
 case class GHOwner(login: String
                  , id: Int
