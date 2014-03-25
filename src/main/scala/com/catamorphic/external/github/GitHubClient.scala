@@ -69,9 +69,15 @@ case class GHPrReceive(action: GHPrAction
                      , number: Int
                      , pull_request: GHPullRequest)
 
+case class GHBranch( label: String
+                   , ref: String
+                   , sha: String)
+
 case class GHPullRequest(url: URI
                        , user: GHOwner
-                       , title: String) // TODO add the rest of the fields defined in http://developer.github.com/v3/pulls/#get-a-single-pull-request
+                       , title: String
+                       , head: GHBranch
+                       , base: GHBranch) // TODO add the rest of the fields defined in http://developer.github.com/v3/pulls/#get-a-single-pull-request
 
 case class GHCommit(id: String // this is a sha1, but it's inconsistently called 'id' here
                   , message: String

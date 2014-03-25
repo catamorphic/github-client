@@ -38,6 +38,7 @@ trait GitHubClientReadsInstances {
 
   }    
 
+  implicit val ghBranchReads: Reads[GHBranch] = Json.reads[GHBranch]
   implicit val ghPullRequestReads: Reads[GHPullRequest] = Json.reads[GHPullRequest]
 
   implicit val ghHookReads: Reads[GHHook] = Json.reads[GHHook]
