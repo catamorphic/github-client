@@ -152,7 +152,7 @@ case class GHCommitComment(body: String
                          , position: Option[Int] = None
                          , url: Option[URI] = None)
 
-case class GHUser(name: String, email: String)
+case class GHUser(name: String, email: Option[String])
 
 case class GHTree(sha: String
                 , url: URI
